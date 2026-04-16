@@ -58,9 +58,9 @@ export default function CustomTemplateDialog({ open, onOpenChange, editTemplate,
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="rounded-2xl max-w-md mx-auto">
+      <DialogContent className="rounded-lg max-w-md mx-auto">
         <DialogHeader>
-          <DialogTitle className="tracking-tight text-xl">{editTemplate ? 'Edit' : 'Create'} Template</DialogTitle>
+          <DialogTitle className="text-base font-semibold">{editTemplate ? 'Edit' : 'Create'} Template</DialogTitle>
           <DialogDescription>
             Use placeholders: [Client Name], [Business Name], [Owner Name], [link], [service type]
           </DialogDescription>
@@ -70,7 +70,7 @@ export default function CustomTemplateDialog({ open, onOpenChange, editTemplate,
             <Label htmlFor="tplName">Template Name</Label>
             <Input
               id="tplName"
-              className="mt-1 rounded-xl"
+              className="mt-1"
               placeholder="e.g. Casual Thanks"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -80,7 +80,7 @@ export default function CustomTemplateDialog({ open, onOpenChange, editTemplate,
             <Label htmlFor="tplBody">Message Body</Label>
             <Textarea
               id="tplBody"
-              className="mt-1 rounded-xl min-h-[120px]"
+              className="mt-1 min-h-[120px]"
               placeholder="Hey [Client Name], thanks for choosing [Business Name]! ..."
               value={body}
               onChange={(e) => setBody(e.target.value)}
@@ -88,14 +88,14 @@ export default function CustomTemplateDialog({ open, onOpenChange, editTemplate,
           </div>
           <div className="flex gap-2">
             {editTemplate && (
-              <Button variant="outline" onClick={handleDelete} className="rounded-xl min-h-[44px] text-destructive">
+              <Button variant="outline" onClick={handleDelete} className="min-h-[44px] text-destructive">
                 Delete
               </Button>
             )}
             <Button
               onClick={handleSave}
               disabled={!name.trim() || !body.trim()}
-              className="flex-1 rounded-xl min-h-[44px]"
+              className="flex-1 min-h-[44px]"
             >
               {editTemplate ? 'Update' : 'Create'} Template
             </Button>

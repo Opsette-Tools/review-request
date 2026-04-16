@@ -44,9 +44,9 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="rounded-2xl max-w-md mx-auto">
+      <DialogContent className="rounded-lg max-w-md mx-auto">
         <DialogHeader>
-          <DialogTitle className="tracking-tight text-xl">Business Settings</DialogTitle>
+          <DialogTitle className="text-base font-semibold">Business Settings</DialogTitle>
           <DialogDescription>Set up your business info. This auto-fills into every message.</DialogDescription>
         </DialogHeader>
         <div className="space-y-4 pt-2">
@@ -54,7 +54,7 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
             <Label htmlFor="bizName">Business Name *</Label>
             <Input
               id="bizName"
-              className="mt-1 rounded-xl"
+              className="mt-1"
               placeholder="e.g. Marcus's Lawn Care"
               value={form.businessName}
               onChange={(e) => setForm({ ...form, businessName: e.target.value })}
@@ -64,7 +64,7 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
             <Label htmlFor="ownerName">Your First Name</Label>
             <Input
               id="ownerName"
-              className="mt-1 rounded-xl"
+              className="mt-1"
               placeholder="e.g. Marcus"
               value={form.ownerName}
               onChange={(e) => setForm({ ...form, ownerName: e.target.value })}
@@ -74,7 +74,7 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
             <Label htmlFor="googleUrl">Google Review URL</Label>
             <Input
               id="googleUrl"
-              className="mt-1 rounded-xl"
+              className="mt-1"
               placeholder="https://g.page/..."
               value={form.googleReviewUrl}
               onChange={(e) => setForm({ ...form, googleReviewUrl: e.target.value })}
@@ -84,7 +84,7 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
             <Label htmlFor="yelpUrl">Yelp Review URL</Label>
             <Input
               id="yelpUrl"
-              className="mt-1 rounded-xl"
+              className="mt-1"
               placeholder="https://yelp.com/biz/..."
               value={form.yelpReviewUrl}
               onChange={(e) => setForm({ ...form, yelpReviewUrl: e.target.value })}
@@ -98,7 +98,7 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
                   key={p}
                   type="button"
                   onClick={() => setForm({ ...form, preferredPlatform: p })}
-                  className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-colors duration-200 min-h-[44px] ${
+                  className={`flex-1 py-2.5 rounded-md text-sm font-medium transition-colors duration-200 min-h-[44px] ${
                     form.preferredPlatform === p
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-secondary text-secondary-foreground border border-border'
@@ -112,7 +112,7 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
           <Button
             onClick={handleSave}
             disabled={!form.businessName.trim()}
-            className="w-full rounded-xl min-h-[44px] text-base font-medium"
+            className="w-full min-h-[44px] text-sm font-medium"
           >
             Save Settings
           </Button>

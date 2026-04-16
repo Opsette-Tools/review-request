@@ -15,10 +15,10 @@ export default function TemplatePills({ templates, selectedId, onSelect, onCreat
           key={t.id}
           type="button"
           onClick={() => onSelect(t.id)}
-          className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 min-h-[44px] whitespace-nowrap ${
+          className={`flex-shrink-0 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 min-h-[44px] whitespace-nowrap ${
             selectedId === t.id
               ? 'bg-primary text-primary-foreground shadow-sm'
-              : 'bg-card text-foreground border border-border hover:border-primary/40'
+              : 'bg-card text-foreground border border-border hover:border-foreground/30'
           }`}
         >
           {t.name}
@@ -27,7 +27,7 @@ export default function TemplatePills({ templates, selectedId, onSelect, onCreat
       <button
         type="button"
         onClick={onCreateNew}
-        className="flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-medium min-h-[44px] whitespace-nowrap border border-dashed border-border text-muted-foreground hover:border-primary/40 hover:text-foreground transition-colors duration-200"
+        className="flex-shrink-0 px-3 py-2 rounded-md text-sm font-medium min-h-[44px] whitespace-nowrap border border-dashed border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground transition-colors duration-200"
       >
         + Custom
       </button>
