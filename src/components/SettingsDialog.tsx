@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BusinessSettings } from '@/lib/types';
+import { BusinessSettings, ReviewPlatform } from '@/lib/types';
 import { getSettings, saveSettings } from '@/lib/storage';
 import {
   Dialog,
@@ -22,9 +22,18 @@ const empty: BusinessSettings = {
   businessName: '',
   googleReviewUrl: '',
   yelpReviewUrl: '',
+  facebookReviewUrl: '',
+  nextdoorReviewUrl: '',
   preferredPlatform: 'google',
   ownerName: '',
 };
+
+const PLATFORM_OPTIONS: { value: ReviewPlatform; label: string }[] = [
+  { value: 'google', label: 'Google' },
+  { value: 'yelp', label: 'Yelp' },
+  { value: 'facebook', label: 'Facebook' },
+  { value: 'nextdoor', label: 'Nextdoor' },
+];
 
 export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsDialogProps) {
   const [form, setForm] = useState<BusinessSettings>(empty);
@@ -91,20 +100,40 @@ export default function SettingsDialog({ open, onOpenChange, onSave }: SettingsD
             />
           </div>
           <div>
+            <Label htmlFor="facebookUrl">Facebook Review URL</Label>
+            <Input
+              id="facebookUrl"
+              className="mt-1"
+              placeholder="https://facebook.com/..."
+              value={form.facebookReviewUrl}
+              onChange={(e) => setForm({ ...form, facebookReviewUrl: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label htmlFor="nextdoorUrl">Nextdoor Review URL</Label>
+            <Input
+              id="nextdoorUrl"
+              className="mt-1"
+              placeholder="https://nextdoor.com/..."
+              value={form.nextdoorReviewUrl}
+              onChange={(e) => setForm({ ...form, nextdoorReviewUrl: e.target.value })}
+            />
+          </div>
+          <div>
             <Label>Preferred Platform</Label>
-            <div className="flex gap-2 mt-1">
-              {(['google', 'yelp'] as const).map((p) => (
+            <div className="grid grid-cols-2 gap-2 mt-1">
+              {PLATFORM_OPTIONS.map(({ value, label }) => (
                 <button
-                  key={p}
+                  key={value}
                   type="button"
-                  onClick={() => setForm({ ...form, preferredPlatform: p })}
-                  className={`flex-1 py-2.5 rounded-md text-sm font-medium transition-colors duration-200 min-h-[44px] ${
-                    form.preferredPlatform === p
+                  onClick={() => setForm({ ...form, preferredPlatform: value })}
+                  className={`py-2.5 rounded-md text-sm font-medium transition-colors duration-200 min-h-[44px] ${
+                    form.preferredPlatform === value
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-secondary text-secondary-foreground border border-border'
                   }`}
                 >
-                  {p === 'google' ? 'Google' : 'Yelp'}
+                  {label}
                 </button>
               ))}
             </div>

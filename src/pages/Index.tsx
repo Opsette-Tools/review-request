@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Settings, Clock, Sparkles, X } from 'lucide-react';
-import { BusinessSettings, MessageTemplate } from '@/lib/types';
+import { Link } from 'react-router-dom';
+import { Settings, Clock, Sparkles, X, Star } from 'lucide-react';
+import { BusinessSettings, MessageTemplate, ReviewPlatform } from '@/lib/types';
 import { getSettings, getCustomTemplates, addHistoryEntry, addRecentService, getRecentServices } from '@/lib/storage';
 import { DEFAULT_TEMPLATES } from '@/lib/templates';
 import { renderMessage } from '@/lib/message';
@@ -22,7 +23,7 @@ export default function Index() {
   const [clientName, setClientName] = useState('');
   const [serviceType, setServiceType] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('professional');
-  const [platform, setPlatform] = useState<'google' | 'yelp'>('google');
+  const [platform, setPlatform] = useState<ReviewPlatform>('google');
   const [message, setMessage] = useState('');
   const [showSentPrompt, setShowSentPrompt] = useState(false);
   const [isDemo, setIsDemo] = useState(false);
@@ -56,12 +57,22 @@ export default function Index() {
     }
   }, [clientName, serviceType, selectedTemplate, platform, settings, allTemplates]);
 
-  const hasUrls = settings && (settings.googleReviewUrl || settings.yelpReviewUrl);
+  const platformUrlMap: Record<ReviewPlatform, string> = {
+    google: settings?.googleReviewUrl || '',
+    yelp: settings?.yelpReviewUrl || '',
+    facebook: settings?.facebookReviewUrl || '',
+    nextdoor: settings?.nextdoorReviewUrl || '',
+  };
+  const hasUrls = settings && Object.values(platformUrlMap).some(Boolean);
   const availablePlatforms = settings
-    ? (['google', 'yelp'] as const).filter(
-        (p) => (p === 'google' ? settings.googleReviewUrl : settings.yelpReviewUrl)
-      )
+    ? (['google', 'yelp', 'facebook', 'nextdoor'] as const).filter((p) => platformUrlMap[p])
     : [];
+  const platformLabels: Record<ReviewPlatform, string> = {
+    google: 'Google',
+    yelp: 'Yelp',
+    facebook: 'Facebook',
+    nextdoor: 'Nextdoor',
+  };
 
   const handleCopied = () => {
     setShowSentPrompt(true);
@@ -104,9 +115,12 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border">
+      <header className="sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b border-border/60">
         <div className="max-w-md mx-auto flex items-center justify-between px-4 h-14">
-          <h1 className="text-base font-semibold text-foreground">ReviewRequest</h1>
+          <div className="flex items-center gap-2">
+            <Star size={18} className="text-primary fill-primary" />
+            <h1 className="text-base font-semibold text-foreground tracking-tight">ReviewRequest</h1>
+          </div>
           <div className="flex gap-1">
             <button
               onClick={() => setHistoryOpen(true)}
@@ -202,19 +216,19 @@ export default function Index() {
         {availablePlatforms.length > 1 && (
           <div>
             <label className="text-sm font-medium text-foreground mb-1 block">Review Platform</label>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {availablePlatforms.map((p) => (
                 <button
                   key={p}
                   type="button"
                   onClick={() => setPlatform(p)}
-                  className={`flex-1 py-2.5 rounded-md text-sm font-medium transition-colors duration-200 min-h-[44px] ${
+                  className={`py-2.5 rounded-md text-sm font-medium transition-colors duration-200 min-h-[44px] ${
                     platform === p
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-card text-foreground border border-border'
                   }`}
                 >
-                  {p === 'google' ? 'Google' : 'Yelp'}
+                  {platformLabels[p]}
                 </button>
               ))}
             </div>
@@ -261,6 +275,12 @@ export default function Index() {
           )}
         </div>
       </main>
+
+      <footer className="max-w-md mx-auto px-4 py-6 flex items-center justify-center gap-3 text-xs text-muted-foreground/50">
+        <Link to="/about" className="hover:text-muted-foreground transition-colors">About</Link>
+        <span>·</span>
+        <Link to="/privacy" className="hover:text-muted-foreground transition-colors">Privacy</Link>
+      </footer>
 
       <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} onSave={refreshSettings} />
       <HistorySheet open={historyOpen} onOpenChange={setHistoryOpen} />

@@ -29,10 +29,10 @@ export default function CopyButton({ text, onCopied }: CopyButtonProps) {
     <button
       type="button"
       onClick={handleCopy}
-      className={`w-full min-h-[48px] rounded-md text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 ${
+      className={`w-full min-h-[48px] rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] shadow-sm ${
         copied
           ? 'bg-success text-success-foreground'
-          : 'bg-primary text-primary-foreground hover:opacity-90'
+          : 'bg-primary text-primary-foreground hover:brightness-105'
       }`}
     >
       {copied ? (

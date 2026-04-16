@@ -1,8 +1,12 @@
+export type ReviewPlatform = 'google' | 'yelp' | 'facebook' | 'nextdoor';
+
 export interface BusinessSettings {
   businessName: string;
   googleReviewUrl: string;
   yelpReviewUrl: string;
-  preferredPlatform: 'google' | 'yelp';
+  facebookReviewUrl: string;
+  nextdoorReviewUrl: string;
+  preferredPlatform: ReviewPlatform;
   ownerName: string;
 }
 
@@ -20,7 +24,7 @@ export interface HistoryEntry {
   clientName: string;
   serviceType: string;
   dateSent: string;
-  platform: 'google' | 'yelp';
+  platform: ReviewPlatform;
   templateName: string;
   message: string;
   reviewStatus: ReviewStatus;

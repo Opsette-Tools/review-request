@@ -17,7 +17,10 @@ const statusIcon = (s: ReviewStatus) => {
   return <MinusCircle size={18} className="text-neutral" />;
 };
 
-const platformLabel = (p: string) => (p === 'google' ? 'Google' : 'Yelp');
+const platformLabel = (p: string) => {
+  const labels: Record<string, string> = { google: 'Google', yelp: 'Yelp', facebook: 'Facebook', nextdoor: 'Nextdoor' };
+  return labels[p] || p;
+};
 
 export default function HistorySheet({ open, onOpenChange }: HistorySheetProps) {
   const [entries, setEntries] = useState<HistoryEntry[]>([]);
