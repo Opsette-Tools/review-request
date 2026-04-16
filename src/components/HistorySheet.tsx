@@ -58,7 +58,7 @@ export default function HistorySheet({ open, onOpenChange }: HistorySheetProps) 
     <Sheet open={open} onOpenChange={handleOpen}>
       <SheetContent side="right" className="w-full sm:max-w-md p-0 flex flex-col">
         <SheetHeader className="p-5 pb-0">
-          <SheetTitle className="tracking-tight text-xl">Request History</SheetTitle>
+          <SheetTitle className="text-base font-semibold">Request History</SheetTitle>
           <SheetDescription className="sr-only">View past review requests</SheetDescription>
         </SheetHeader>
 
@@ -85,18 +85,18 @@ export default function HistorySheet({ open, onOpenChange }: HistorySheetProps) 
                 <ChevronRight size={16} className="rotate-180" /> Back
               </button>
               <div>
-                <h3 className="font-semibold tracking-tight text-lg">{selected.clientName}</h3>
+                <h3 className="font-semibold text-base">{selected.clientName}</h3>
                 <p className="text-sm text-muted-foreground mt-1">
                   {new Date(selected.dateSent).toLocaleDateString()} · {platformLabel(selected.platform)} · {selected.templateName}
                 </p>
               </div>
-              <div className="p-4 rounded-2xl bg-primary/10 text-base leading-relaxed whitespace-pre-wrap">
+              <div className="p-4 rounded-md bg-muted text-sm leading-relaxed whitespace-pre-wrap border border-border">
                 {selected.message}
               </div>
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="flex-1 rounded-xl min-h-[44px]"
+                  className="flex-1 min-h-[44px]"
                   onClick={() => cycleStatus(selected)}
                 >
                   {statusIcon(selected.reviewStatus)}
@@ -104,7 +104,7 @@ export default function HistorySheet({ open, onOpenChange }: HistorySheetProps) 
                 </Button>
                 <Button
                   variant="outline"
-                  className="rounded-xl min-h-[44px] text-destructive"
+                  className="min-h-[44px] text-destructive"
                   onClick={() => handleDelete(selected.id)}
                 >
                   <Trash2 size={16} />
@@ -126,7 +126,7 @@ export default function HistorySheet({ open, onOpenChange }: HistorySheetProps) 
                 >
                   {statusIcon(entry.reviewStatus)}
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium truncate">{entry.clientName}</div>
+                    <div className="font-medium truncate text-sm">{entry.clientName}</div>
                     <div className="text-xs text-muted-foreground">
                       {new Date(entry.dateSent).toLocaleDateString()} · {platformLabel(entry.platform)}
                     </div>

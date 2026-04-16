@@ -49,7 +49,6 @@ export default function Index() {
     refreshTemplates();
   }, [refreshTemplates]);
 
-  // Re-render message when inputs change
   useEffect(() => {
     const tpl = allTemplates.find((t) => t.id === selectedTemplate);
     if (tpl) {
@@ -105,21 +104,20 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top bar */}
       <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-md mx-auto flex items-center justify-between px-4 h-14">
-          <h1 className="text-lg font-semibold tracking-tight text-foreground">ReviewRequest</h1>
+          <h1 className="text-base font-semibold text-foreground">ReviewRequest</h1>
           <div className="flex gap-1">
             <button
               onClick={() => setHistoryOpen(true)}
-              className="p-2.5 rounded-xl hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2.5 rounded-md hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label="History"
             >
               <Clock size={20} className="text-muted-foreground" />
             </button>
             <button
               onClick={() => setSettingsOpen(true)}
-              className="p-2.5 rounded-xl hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2.5 rounded-md hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label="Settings"
             >
               <Settings size={20} className="text-muted-foreground" />
@@ -129,9 +127,8 @@ export default function Index() {
       </header>
 
       <main className="max-w-md mx-auto px-4 py-5 space-y-5">
-        {/* Nudge card */}
         {settings && !hasUrls && (
-          <div className="bg-card rounded-2xl shadow-sm border border-border p-5">
+          <div className="bg-card rounded-md shadow-sm border border-border p-4">
             <p className="text-sm text-muted-foreground">
               Add your Google or Yelp review link in{' '}
               <button onClick={() => setSettingsOpen(true)} className="text-primary font-medium underline underline-offset-2">
@@ -142,9 +139,8 @@ export default function Index() {
           </div>
         )}
 
-        {/* Demo banner */}
         {isDemo && (
-          <div className="flex items-center justify-between bg-warning/10 rounded-2xl px-4 py-3 text-sm">
+          <div className="flex items-center justify-between bg-warning/10 rounded-md px-4 py-3 text-sm">
             <span className="flex items-center gap-2 text-foreground">
               <Sparkles size={16} className="text-warning" /> Demo data loaded
             </span>
@@ -154,18 +150,16 @@ export default function Index() {
           </div>
         )}
 
-        {/* Client name */}
         <div>
           <label className="text-sm font-medium text-foreground mb-1 block">Client Name</label>
           <Input
             value={clientName}
             onChange={(e) => setClientName(e.target.value)}
             placeholder="Who did you just help?"
-            className="rounded-xl text-base h-12"
+            className="text-sm h-10"
           />
         </div>
 
-        {/* Service type */}
         <div className="relative">
           <label className="text-sm font-medium text-foreground mb-1 block">Service Type</label>
           <Input
@@ -177,10 +171,10 @@ export default function Index() {
             }}
             onBlur={() => setTimeout(() => setShowRecent(false), 150)}
             placeholder="e.g. lawn care, deep cleaning"
-            className="rounded-xl text-base h-12"
+            className="text-sm h-10"
           />
           {showRecent && recentServices.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-md z-10 overflow-hidden">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-md z-10 overflow-hidden">
               {recentServices.map((s) => (
                 <button
                   key={s}
@@ -195,7 +189,6 @@ export default function Index() {
           )}
         </div>
 
-        {/* Template picker */}
         <div>
           <label className="text-sm font-medium text-foreground mb-2 block">Template</label>
           <TemplatePills
@@ -206,7 +199,6 @@ export default function Index() {
           />
         </div>
 
-        {/* Platform toggle */}
         {availablePlatforms.length > 1 && (
           <div>
             <label className="text-sm font-medium text-foreground mb-1 block">Review Platform</label>
@@ -216,7 +208,7 @@ export default function Index() {
                   key={p}
                   type="button"
                   onClick={() => setPlatform(p)}
-                  className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-colors duration-200 min-h-[44px] ${
+                  className={`flex-1 py-2.5 rounded-md text-sm font-medium transition-colors duration-200 min-h-[44px] ${
                     platform === p
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-card text-foreground border border-border'
@@ -229,13 +221,11 @@ export default function Index() {
           </div>
         )}
 
-        {/* Message preview */}
         <div>
           <label className="text-sm font-medium text-foreground mb-2 block">Message Preview</label>
           <MessagePreview message={message} onChange={setMessage} />
         </div>
 
-        {/* Actions */}
         <div className="space-y-3">
           <CopyButton text={message} onCopied={handleCopied} />
 
@@ -244,14 +234,14 @@ export default function Index() {
               <Button
                 onClick={handleMarkSent}
                 variant="outline"
-                className="flex-1 rounded-xl min-h-[44px] text-sm"
+                className="flex-1 min-h-[44px] text-sm"
               >
                 Mark as Sent
               </Button>
               <Button
                 onClick={() => setShowSentPrompt(false)}
                 variant="ghost"
-                className="rounded-xl min-h-[44px] text-sm text-muted-foreground"
+                className="min-h-[44px] text-sm text-muted-foreground"
               >
                 Skip
               </Button>
@@ -259,13 +249,13 @@ export default function Index() {
           )}
 
           {!formEmpty && !showSentPrompt && (
-            <Button onClick={handleClear} variant="ghost" className="w-full rounded-xl min-h-[44px] text-sm text-muted-foreground">
+            <Button onClick={handleClear} variant="ghost" className="w-full min-h-[44px] text-sm text-muted-foreground">
               Clear
             </Button>
           )}
 
           {formEmpty && !isDemo && (
-            <Button onClick={loadDemo} variant="ghost" className="w-full rounded-xl min-h-[44px] text-sm text-muted-foreground">
+            <Button onClick={loadDemo} variant="ghost" className="w-full min-h-[44px] text-sm text-muted-foreground">
               <Sparkles size={16} className="mr-1" /> Try Demo
             </Button>
           )}

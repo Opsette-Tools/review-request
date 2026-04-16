@@ -13,7 +13,6 @@ export default function CopyButton({ text, onCopied }: CopyButtonProps) {
     try {
       await navigator.clipboard.writeText(text);
     } catch {
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = text;
       document.body.appendChild(ta);
@@ -30,7 +29,7 @@ export default function CopyButton({ text, onCopied }: CopyButtonProps) {
     <button
       type="button"
       onClick={handleCopy}
-      className={`w-full min-h-[52px] rounded-xl text-base font-medium flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 ${
+      className={`w-full min-h-[48px] rounded-md text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 ${
         copied
           ? 'bg-success text-success-foreground'
           : 'bg-primary text-primary-foreground hover:opacity-90'
@@ -38,12 +37,12 @@ export default function CopyButton({ text, onCopied }: CopyButtonProps) {
     >
       {copied ? (
         <>
-          <Check className="animate-scale-check" size={20} />
+          <Check className="animate-scale-check" size={18} />
           Copied! Paste it into your text message 💬
         </>
       ) : (
         <>
-          <Copy size={20} />
+          <Copy size={18} />
           Copy to Clipboard
         </>
       )}
