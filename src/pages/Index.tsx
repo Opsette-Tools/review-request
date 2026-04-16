@@ -280,6 +280,18 @@ export default function Index() {
         <Link to="/about" className="hover:text-muted-foreground transition-colors">About</Link>
         <span>·</span>
         <Link to="/privacy" className="hover:text-muted-foreground transition-colors">Privacy</Link>
+        <span>·</span>
+        <span>
+          By{' '}
+          <a
+            href="https://opsette.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-muted-foreground transition-colors underline"
+          >
+            Opsette
+          </a>
+        </span>
       </footer>
 
       <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} onSave={refreshSettings} />

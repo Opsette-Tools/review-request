@@ -27,7 +27,15 @@ export default function About() {
           <div>
             <h2 className="text-base font-semibold text-foreground">ReviewRequest Generator</h2>
             <p className="text-sm text-muted-foreground mt-1">
-              A business tool by Opsette Tools
+              A business tool from{' '}
+              <a
+                href="https://opsette.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground transition-colors"
+              >
+                Opsette Marketplace
+              </a>
             </p>
           </div>
         </div>
@@ -79,6 +87,18 @@ export default function About() {
 
         <p className="text-xs text-muted-foreground/60 text-center pt-4">
           All data stays on your device. Nothing is sent to any server.
+        </p>
+
+        <p className="text-xs text-muted-foreground/60 text-center">
+          Find more tools at{' '}
+          <a
+            href="https://opsette.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-muted-foreground transition-colors"
+          >
+            opsette.io
+          </a>.
         </p>
       </main>
     </div>
