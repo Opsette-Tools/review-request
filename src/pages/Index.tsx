@@ -13,6 +13,7 @@ import CopyButton from '@/components/CopyButton';
 import CustomTemplateDialog from '@/components/CustomTemplateDialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ShareAppButton } from '@/components/opsette-share';
 
 export default function Index() {
   const [settings, setSettings] = useState<BusinessSettings | null>(null);
@@ -121,7 +122,8 @@ export default function Index() {
             <Star size={18} className="text-primary fill-primary" />
             <h1 className="text-base font-semibold text-foreground tracking-tight">ReviewRequest</h1>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
+            <ShareAppButton size={40} />
             <button
               onClick={() => setHistoryOpen(true)}
               className="p-2.5 rounded-md hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"

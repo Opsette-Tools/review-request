@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { OpsetteFooterLogo } from '@/components/opsette-share';
 
 export default function Privacy() {
   const navigate = useNavigate();
@@ -58,6 +59,8 @@ export default function Privacy() {
         <p className="text-xs text-muted-foreground/60 pt-4">
           Last updated: April 2026
         </p>
+
+        <OpsetteFooterLogo />
       </main>
     </div>
   );

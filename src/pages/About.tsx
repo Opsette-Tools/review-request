@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Star } from 'lucide-react';
+import { OpsetteFooterLogo } from '@/components/opsette-share';
 
 export default function About() {
   const navigate = useNavigate();
@@ -89,17 +90,7 @@ export default function About() {
           All data stays on your device. Nothing is sent to any server.
         </p>
 
-        <p className="text-xs text-muted-foreground/60 text-center">
-          Find more tools at{' '}
-          <a
-            href="https://opsette.io"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-muted-foreground transition-colors"
-          >
-            opsette.io
-          </a>.
-        </p>
+        <OpsetteFooterLogo />
       </main>
     </div>
   );
