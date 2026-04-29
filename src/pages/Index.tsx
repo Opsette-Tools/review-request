@@ -14,6 +14,7 @@ import CustomTemplateDialog from '@/components/CustomTemplateDialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { OpsetteHeader } from '@/components/opsette-header';
+import { ThemeToggleButton } from '@/components/ThemeToggleButton';
 
 export default function Index() {
   const [settings, setSettings] = useState<BusinessSettings | null>(null);
@@ -133,6 +134,7 @@ export default function Index() {
             >
               <Settings size={20} className="text-muted-foreground" />
             </button>
+            <ThemeToggleButton />
           </>
         }
       />
