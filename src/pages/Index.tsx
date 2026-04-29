@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Settings, Clock, Sparkles, X, Star } from 'lucide-react';
+import { Settings, Clock, Sparkles, X } from 'lucide-react';
 import { BusinessSettings, MessageTemplate, ReviewPlatform } from '@/lib/types';
 import { getSettings, getCustomTemplates, addHistoryEntry, addRecentService, getRecentServices } from '@/lib/storage';
 import { DEFAULT_TEMPLATES } from '@/lib/templates';
@@ -13,7 +13,7 @@ import CopyButton from '@/components/CopyButton';
 import CustomTemplateDialog from '@/components/CustomTemplateDialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { ShareAppButton } from '@/components/opsette-share';
+import { OpsetteHeader } from '@/components/opsette-header';
 
 export default function Index() {
   const [settings, setSettings] = useState<BusinessSettings | null>(null);
@@ -116,31 +116,26 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b border-border/60">
-        <div className="max-w-md mx-auto flex items-center justify-between px-4 h-14">
-          <div className="flex items-center gap-2">
-            <Star size={18} className="text-primary fill-primary" />
-            <h1 className="text-base font-semibold text-foreground tracking-tight">ReviewRequest</h1>
-          </div>
-          <div className="flex gap-1 items-center">
-            <ShareAppButton size={40} />
+      <OpsetteHeader
+        rightExtra={
+          <>
             <button
               onClick={() => setHistoryOpen(true)}
-              className="p-2.5 rounded-md hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
               aria-label="History"
             >
               <Clock size={20} className="text-muted-foreground" />
             </button>
             <button
               onClick={() => setSettingsOpen(true)}
-              className="p-2.5 rounded-md hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2 rounded-md hover:bg-muted transition-colors flex items-center justify-center"
               aria-label="Settings"
             >
               <Settings size={20} className="text-muted-foreground" />
             </button>
-          </div>
-        </div>
-      </header>
+          </>
+        }
+      />
 
       <main className="max-w-md mx-auto px-4 py-5 space-y-5">
         {settings && !hasUrls && (
